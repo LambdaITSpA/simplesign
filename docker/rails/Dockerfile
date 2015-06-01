@@ -48,9 +48,6 @@ RUN echo "  PassengerRoot /usr/local/rvm/gems/ruby-2.1.0/gems/passenger-4.0.56" 
 RUN echo "  PassengerDefaultRuby /usr/local/rvm/gems/ruby-2.1.0/wrappers/ruby" >> /etc/apache2/apache2.conf
 RUN echo "</IfModule>" >> /etc/apache2/apache2.conf
 
-COPY 000-default.conf /etc/apache2/sites-available/default
-#RUN a2ensite firmaexpress.com.conf
-#RUN echo "127.0.0.1 firmaexpress.com" >> /etc/hosts
 EXPOSE 80
 
 #Non-root user
