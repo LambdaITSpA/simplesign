@@ -86,8 +86,8 @@ test:
 
 production:
   <<: *default
-  database: simplesign_development
+  database: simplesign_production
   username: simplesign
   password: S1mpl3s1gn
-  host: localhost
+  host: simplesign-production.cem5jyc53ice.us-west-2.rds.amazonaws.com
   port: 5432

@@ -1,10 +1,11 @@
 FROM ubuntu:12.04
-ENV REFRESHED_AT 2015-29-01 13:56
+ENV REFRESHED_AT 2015-01-06 00:59
 
 RUN apt-get update
 RUN apt-get install -y nano
 RUN apt-get install -y postgresql-9.1 libpq-dev
 RUN echo "kernel.shmmax = 104857600" >> /etc/sysctl.conf
+RUN echo "kernel.shmmin = 1048576" >> /etc/sysctl.conf
 
 ###############################################
 #  May 2015 Fsync Permissions Bug Workaround  #
