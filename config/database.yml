@@ -78,8 +78,16 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+#production:
+#  <<: *default
+#  database: simplesign_production
+#  username: simplesign
+#  password: <%= ENV['SIMPLESIGN_DATABASE_PASSWORD'] %>
+
 production:
   <<: *default
-  database: simplesign_production
+  database: simplesign_development
   username: simplesign
-  password: <%= ENV['SIMPLESIGN_DATABASE_PASSWORD'] %>
+  password: S1mpl3s1gn
+  host: localhost
+  port: 5432
