@@ -48,7 +48,7 @@ RUN echo "  PassengerRoot /usr/local/rvm/gems/ruby-2.1.0/gems/passenger-4.0.56" 
 RUN echo "  PassengerDefaultRuby /usr/local/rvm/gems/ruby-2.1.0/wrappers/ruby" >> /etc/apache2/apache2.conf
 RUN echo "</IfModule>" >> /etc/apache2/apache2.conf
 
-EXPOSE 80
+EXPOSE 80 5432
 
 #Non-root user
 RUN apt-get -y install sudo
