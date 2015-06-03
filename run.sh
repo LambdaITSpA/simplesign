@@ -8,4 +8,5 @@ docker run --net="host" \
 --add-host lambdait.cl:127.0.0.1 \
 --add-host www.lambdait.cl:127.0.0.1 \
 -v $PWD:/home/ubuntu/webapp \
+-v $PWD:/home/ubuntu/webapp-dev \
 --name simplesign-rails -d lambdait/simplesign-rails
