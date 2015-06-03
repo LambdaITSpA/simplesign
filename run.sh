@@ -4,6 +4,7 @@ docker run --net="host" \
 -v $PWD/docker/rails/simplesign.cl.conf:/etc/apache2/sites-enabled/simplesign.cl:ro \
 -v $PWD/docker/rails/lambdait.cl.conf:/etc/apache2/sites-enabled/lambdait.cl:ro \
 --add-host simplesign.cl:127.0.0.1 \
+--add-host dev.simplesign.cl:127.0.0.1 \
 --add-host www.simplesign.cl:127.0.0.1 \
 --add-host lambdait.cl:127.0.0.1 \
 --add-host www.lambdait.cl:127.0.0.1 \
