@@ -59,7 +59,9 @@ WORKDIR /home/ubuntu/webapp
 ENV REFRESHED_AT 2015-19-04 22:43
 #RUN /bin/bash -l -c "bundle install"
 
-EXPOSE 80 8081
+EXPOSE 80
+EXPOSE 8081
+EXPOSE 8082
 
 #CMD /bin/bash -l
 CMD /usr/sbin/apache2 -D FOREGROUND
