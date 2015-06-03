@@ -86,6 +86,14 @@ test:
 #  username: simplesign
 #  password: <%= ENV['SIMPLESIGN_DATABASE_PASSWORD'] %>
 
+staging:
+  <<: *default
+  database: simplesign_production
+  username: simplesign
+  password: S1mpl3s1gn
+  host: simplesign-production.cem5jyc53ice.us-west-2.rds.amazonaws.com
+  port: 5432
+
 production:
   <<: *default
   database: simplesign_production
