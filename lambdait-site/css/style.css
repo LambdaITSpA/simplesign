@@ -3498,6 +3498,13 @@ Author URI: http://www.ab-themes.com
 		background-color:#2367E4;
 	}
 
+	.revelance-small{
+		font-size: 18px;
+		font-weight: 500;
+		text-shadow: 5px 5px 5px #000;
+		color: #fff;
+	}
+
 	.revelance-small-with-lines:before,
 	.revelance-small-with-lines:after{
 		display: block;
@@ -3519,6 +3526,10 @@ Author URI: http://www.ab-themes.com
 	}
 
 	.tp-caption.revelance-button{
+	}
+
+	.tp-caption.revelance-big{
+		text-shadow: 5px 5px 20px #000000;
 	}
 
 	.tp-caption.revelance-button a{
