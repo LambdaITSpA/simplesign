@@ -10,7 +10,21 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+// require jquery
+//= require libs/jquery/jquery-1.11.2.min
 //= require jquery_ujs
 //= require turbolinks
-//= require_tree .
+// require_tree .
+//= require libs/jquery/jquery-migrate-1.2.1.min
+//= require libs/bootstrap/bootstrap.min
+//= require libs/spin.js/spin
+//= require libs/autosize/jquery.autosize
+//= require libs/nanoscroller/jquery.nanoscroller
+//= require core/source/App
+//= require core/source/AppNavigation
+//= require core/source/AppOffcanvas
+//= require core/source/AppCard
+//= require core/source/AppForm
+//= require core/source/AppNavSearch
+//= require core/source/AppVendor
+//= require core/demo/Demo

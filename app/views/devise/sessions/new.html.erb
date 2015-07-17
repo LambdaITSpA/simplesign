@@ -1,0 +1,30 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: 'form floating-label'}) do |f| %>
+  <div class="form-group">
+    <%= f.email_field :email, class: 'form-control', autofocus: true %>
+    <%= f.label :email %>
+  </div>
+
+  <div class="form-group">
+    <%= f.password_field :password, class: 'form-control', autocomplete: "off", value: '' %>
+    <%= f.label :password %>
+    <p class="help-block">
+      <%= render "devise/shared/links" %>
+    </p>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-6 text-left">
+      <div class="checkbox checkbox-inline checkbox-styled">
+        <% if devise_mapping.rememberable? -%>
+          <label>
+            <input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me"> <span>Recordar</span>
+          </label>
+        <% end -%>
+      </div>
+    </div><!--end .col -->
+    <div class="col-xs-6 text-right">
+      <%= f.submit "Acceder", class: 'btn btn-primary btn-raised' %>
+    </div><!--end .col -->
+  </div><!--end .row -->
+<% end %>
+
