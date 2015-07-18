@@ -28,3 +28,4 @@
 //= require core/source/AppNavSearch
 //= require core/source/AppVendor
 //= require core/demo/Demo
+//= require core/demo/DemoUIMessages

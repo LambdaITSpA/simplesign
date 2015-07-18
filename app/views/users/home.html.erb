@@ -1,1 +1,42 @@
-Oli c:
+<div class="card">
+	<div class="card-body no-padding">
+		<ul class="list divider-full-bleed">
+			<% @documents.each do |doc| %>
+			<li class="tile">
+				<a class="tile-content ink-reaction" href="#offcanvas-document-<%= doc.id %>" data-toggle="offcanvas">
+					<div class="tile-icon">
+						<i class="fa fa-file"></i>
+					</div>
+					<div class="tile-text">
+						<%= doc.name %>
+					</div>
+				</a>
+			</li>
+			<% end %>
+		</ul>
+	</div><!--end .card-body -->
+</div>
+<% content_for :offcanvas_right do %>
+	<% @documents.each do |doc| %>
+		<!-- BEGIN OFFCANVAS DEMO RIGHT -->
+		<div id="offcanvas-document-<%= doc.id %>" class="offcanvas-pane width-12" style="width:800px">
+			<div class="offcanvas-head">
+				<header><%= doc.name %></header>
+				<div class="offcanvas-tools">
+					<a class="btn btn-icon-toggle btn-default-light pull-right" data-dismiss="offcanvas">
+						<i class="fa fa-close"></i>
+					</a>
+				</div>
+			</div>
+			<div class="offcanvas-body">
+				<iframe src="<%= doc.file.url %>" style="width: 600px; height: 500px;"></iframe>
+			</div>
+			<!--<div class="force-padding stick-bottom-right">
+				<a class="btn btn-floating-action btn-accent " href="#offcanvas-demo-size3" data-toggle="offcanvas">
+					<i class="md md-arrow-back"></i>
+				</a>
+			</div>-->
+		</div>
+		<!-- END OFFCANVAS DEMO RIGHT -->
+	<% end %>
+<% end %>

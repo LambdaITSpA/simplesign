@@ -85,7 +85,7 @@
 					<ul class="header-nav header-nav-profile">
 						<li class="dropdown">
 							<a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
-								<img src="" alt="" />
+								<%= image_tag current_user.avatar.url :thumb %>
 								<span class="profile-info">
 									<%= current_user.full_name if user_signed_in? %>
 									<!--<small>Administrator</small>-->
@@ -93,7 +93,7 @@
 							</a>
 							<ul class="dropdown-menu animation-dock">
 								<li class="dropdown-header">Configuración</li>
-								<li><a href="#"><i class="fa fa-fw fa-user"></i> Mi Perfil</a></li>
+								<li><%= link_to '<i class="fa fa-fw fa-user"></i> Mi Perfil'.html_safe, edit_user_registration_path %></li>
 								<li class="divider"></li>
 								<li><%= link_to '<i class="fa fa-fw fa-power-off text-danger"></i> Cerrar sesion'.html_safe, destroy_user_session_path, method: :delete %></li>
 							</ul><!--end .dropdown-menu -->
@@ -119,8 +119,8 @@
 				<section>
 					<div class="section-header">
 						<ol class="breadcrumb">
-							<li><a href="../../html/.html">home</a></li>
-							<li class="active">Blank page</li>
+							<li><a href="../../html/.html">home</a><!--</li>
+							<li class="active">Blank page</li>-->
 						</ol>
 					</div><!--end .section-header -->
 					<div class="section-body">
@@ -151,11 +151,13 @@
 					<!-- BEGIN MAIN MENU -->
 					<ul id="main-menu" class="gui-controls">
 
+						<div style="text-align:center"><button type="button" class="btn ink-reaction btn-raised btn-primary" data-toggle="modal" data-target="#uploadModal">Nuevo Documento</button></div>
+
 						<!-- BEGIN DASHBOARD -->
 						<li>
 							<a href="<%= user_root_path %>" >
 								<div class="gui-icon"><i class="fa fa-home"></i></div>
-								<span class="title">Documentos</span>
+								<span class="title">Documentos <div class="badge style-background"><%= @documents.count %></div></span>
 							</a>
 						</li><!--end /menu-li -->
 						<!-- END DASHBOARD -->
@@ -172,8 +174,52 @@
 			</div><!--end #menubar-->
 			<!-- END MENUBAR -->
 
+			<!-- BEGIN UPLOAD MODAL -->
+			<div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="uploadModalLabel">Subir nuevo documento</h4>
+						</div>
+						<%= form_for @document, :html => { multipart: true, class: 'form-horizontal', role: 'form' } do |f| %>
+							<div class="modal-body">
+								<div class="form-group">
+									<div class="col-sm-3">
+										<label for="email1" class="control-label">Titulo</label>
+									</div>
+									<div class="col-sm-9">
+										<%= f.text_field :name %>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-3">
+										<label for="password1" class="control-label">Documento</label>
+									</div>
+									<div class="col-sm-9">
+						  				<%= f.file_field :file, required: 'required' %>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-3">
+									</div>
+									<div class="col-sm-9">
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+								<%= f.submit 'Subir', class: 'btn btn-primary' %>
+							</div>
+						<% end %>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<!-- END UPLOAD MODAL -->
+
 			<!-- BEGIN OFFCANVAS RIGHT -->
 			<div class="offcanvas">
+				<%= yield :offcanvas_right %>
 			</div><!--end .offcanvas-->
 			<!-- END OFFCANVAS RIGHT -->
 

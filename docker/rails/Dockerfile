@@ -1,12 +1,12 @@
 FROM ubuntu:12.04
-ENV REFRESHED_AT 2015-19-07 21:20
+ENV REFRESHED_AT 2015-17-07 21:27
 
 RUN apt-get update
 RUN apt-get install -y python-software-properties software-properties-common
 
 RUN apt-add-repository ppa:chris-lea/node.js
 RUN apt-get update
-RUN apt-get install -y curl nano nodejs build-essential libcurl4-openssl-dev
+RUN apt-get install -y curl nano nodejs build-essential libcurl4-openssl-dev imagemagick
 
 #Ruby
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
