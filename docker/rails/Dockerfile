@@ -56,8 +56,8 @@ RUN useradd -ms /bin/bash -g sudo ubuntu && echo "ubuntu:ubuntu" | chpasswd
 #USER ubuntu
 WORKDIR /home/ubuntu/webapp
 
-ENV REFRESHED_AT 2015-19-07 21:20
-#RUN /bin/bash -l -c "bundle install"
+ENV REFRESHED_AT 2015-23-07 20:49
+RUN /bin/bash -l -c "bundle install"
 
 EXPOSE 80
 EXPOSE 8081

@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   get 'home' => "users#home", as: 'user_root'
-  resource :documents, only: [:create]
+  get 'users/check_chilean_id/:serial' => 'users#check_chilean_id', as: :check_chilean_id
+  get 'users/check_chilean_id_with_rut' => 'users#check_chilean_id_with_rut', as: :check_chilean_id_with_rut
+  get 'users/eagle_eye' => 'users#eagle_eye'
+  resources :documents, only: [:index, :create, :destroy, :show]
+  get 'documents/:id/destroy' => 'documents#destroy', as: :destroy_document
+  get 'documents/:id/sign' => 'documents#sign', as: :sign_document
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,39 +1,125 @@
-<section>
+<section ng-controller="DocumentsIndexController">
 	<div class="section-header">
 		<ol class="breadcrumb">
-			<li><a href="#">home</a><!--</li>
-			<li class="active">Blank page</li>-->
+			<li class="active"><a href="#">home</a></li>
 		</ol>
 	</div><!--end .section-header -->
 	<div class="section-body">
 		<div class="card">
 			<div class="card-body no-padding">
 				<ul class="list divider-full-bleed">
-					<% @documents.each do |doc| %>
-					<li class="tile">
-						<a class="tile-content ink-reaction" href="#offcanvas-document-<%= doc.id %>" data-toggle="offcanvas">
+					<li class="tile" ng-repeat="document in documents">
+						<a class="tile-content ink-reaction" href="#offcanvas-document" data-toggle="offcanvas" ng-click="show_document(document.id)">
 							<div class="tile-icon">
 								<i class="fa fa-file-pdf-o"></i>
 							</div>
 							<div class="tile-text">
-								<%= doc.name %>
+								{{ document.name }}
 							</div>
-							<% doc.participants.each do |p| %>
-							<div class="tile-icon">
-								<%= image_tag p.user.avatar.url(:thumb), class: 'border-white border-xl' %> 
+							<div class="tile-icon" ng-repeat="participant in document.participants">
+								<img src="{{ participant.avatar }}" class="border-white border-xl">
 							</div>
-							<% end %>
 							<div class="tile-icon">
 								<i class="fa fa-pencil"></i>
-								<sup class="badge style-danger" style="margin-left:-12px;">1</sup>
+								<sup class="badge style-danger" style="margin-left:-12px;" ng-if="document.signs_pending">{{ document.signs_pending_count }}</sup>
+								<sup class="fa fa-check btn-success btn-flat" style="margin-left:-12px;" ng-if="!document.signs_pending"></sup>
 							</div>
 						</a>
 					</li>
-					<% end %>
 				</ul>
 			</div><!--end .card-body -->
 		</div>
 		<% content_for :offcanvas_right do %>
+			<!-- BEGIN OFFCANVAS DEMO RIGHT -->
+			<div id="offcanvas-document" class="offcanvas-pane width-12" style="width:900px" ng-controller="DocumentShowController">
+				<div class="offcanvas-head">
+					<header>{{ document.name }}</header>
+					<div class="offcanvas-tools">
+						<a class="btn btn-icon-toggle btn-default-light pull-right" data-dismiss="offcanvas">
+							<i class="fa fa-close"></i>
+						</a>
+					</div>
+				</div>
+				<div class="offcanvas-body">
+					<div class="card">
+						<div class="card-body no-padding">
+							<div class="list divider-full-bleed">
+								<div class="tile">
+									<a href="#" class="btn btn-primary ink-reaction" ng-if="!document.signed" data-toggle="modal" data-target="#signModal"><i class="fa fa-pencil"></i> Firmar</a>
+									<a href="#" class="btn btn-success ink-reaction" ng-if="document.signed"><i class="fa fa-check"></i> Documento Firmado</a>
+									<a href="#" class="btn btn-flat btn-danger ink-reaction" ng-confirm-click="¿Estás seguro de eliminar el documento {{ document.name }}?" confirmed-click="destroy_document()"><i class="fa fa-trash"></i> Eliminar</a>
+									<div class="tile-content"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-8">
+							<iframe src="{{ document.file }}" style="width: 580px; height: 500px;"></iframe>
+						</div>
+						<div class="col-sm-4">
+							<div class="card">
+								<div class="card-head"><header>Participantes</header></div>
+								<div class="card-body no-padding">
+									<ul class="list divider-full-bleed">
+										<li class="tile" ng-repeat="participant in document.participants">
+											<a class="tile-content ink-reaction">
+												<div class="tile-icon">
+													<img src="{{ participant.avatar }}" name="avatar">
+												</div>
+												<div class="tile-text">
+													{{ participant.full_name }}
+												</div>
+												<!-- if p.signed -->
+												<div class="tile-icon" ng-if="participant.signed">
+													<i class="fa fa-check-square-o btn-success btn-flat"></i>
+												</div>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- BEGIN SIGN MODAL -->
+				<div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="signModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="signModalLabel">Firmar Documento</h4>
+							</div>
+							<div class="modal-body">
+							¿Está seguro de firmar este documento?
+							<% if current_user.chilean_id_validation_enabled %>
+							<form style="margin-bottom:80px;">
+								<div class="form-group">
+									<div class="col-sm-4">
+										<label for="email1" style="control-label">Numero de serie de Cedula</label>
+									</div>
+									<div class="col-sm-8">
+										<input type="text" class="form-control" ng-model="chilean_id_serial"> <span style="color:#f44336;" ng-if="valid_user_error == true">Cedula inválida!</span>
+									</div>
+								</div>
+							</form>
+							<% end %>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+								<button type="button" class="btn btn-primary" ng-click="sign_document()">Firmar</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
+				<!-- END SIGN MODAL -->
+				<!--<div class="force-padding stick-bottom-right">
+					<a class="btn btn-floating-action btn-accent " href="#offcanvas-demo-size3" data-toggle="offcanvas">
+						<i class="md md-arrow-back"></i>
+					</a>
+				</div>-->
+			</div>
+			<!-- END OFFCANVAS DEMO RIGHT -->
 			<% @documents.each do |doc| %>
 				<!-- BEGIN OFFCANVAS DEMO RIGHT -->
 				<div id="offcanvas-document-<%= doc.id %>" class="offcanvas-pane width-12" style="width:900px">
@@ -50,15 +136,12 @@
 							<div class="card-body no-padding">
 								<div class="list divider-full-bleed">
 									<div class="tile">
-										<a class="btn btn-primary ink-reaction">
-											<i class="fa fa-pencil"></i> Firmar
-										</a>
-										<a class="btn btn-flat ink-reaction">
+										<%= link_to '<i class="fa fa-pencil"></i> Firmar'.html_safe, sign_document_path(doc.id), class: 'btn btn-primary ink-reaction', method: :post, data: { confirm: "Estás seguro de firmar el documento #{doc.name}" } unless current_user.signed(doc) %>
+										<%= link_to '<i class="fa fa-check"></i> Documento Firmado'.html_safe, '', class: 'btn btn-success ink-reaction' if doc.signed %>
+										<!--<a class="btn btn-flat ink-reaction">
 											<i class="fa fa-user-plus"></i> Agregar Participante
-										</a>
-										<a class="btn btn-flat btn-danger ink-reaction">
-											<i class="fa fa-trash"></i> Eliminar
-										</a>
+										</a>-->
+										<%= link_to '<i class="fa fa-trash"></i> Eliminar'.html_safe, doc, class: 'btn btn-flat btn-danger ink-reaction', method: :delete, data: { confirm: "Estás seguro de eliminar el documento #{doc.name}" } %>
 										<div class="tile-content"></div>
 									</div>
 								</div>
@@ -82,6 +165,11 @@
 														<div class="tile-text">
 															<%= p.user.full_name %> <%= '(tu)' if p.user == current_user %>
 														</div>
+														<% if p.signed %>
+														<div class="tile-icon">
+															<i class="fa fa-check-square-o btn-success btn-flat"></i>
+														</div>
+														<% end %>
 													</a>
 												</li>
 											<% end %>

@@ -5,9 +5,13 @@
 		// Create reference to this instance
 		var o = this;
 		// Initialize app when document is ready
-		$(document).ready(function () {
+		$(document).bind('init-offcanvas', function (e) {
+			console.log('init-offcanvas');
 			o.initialize();
 		});
+		/*$(document).ready(function () {
+			o.initialize();
+		});*/
 
 	};
 	var p = AppOffcanvas.prototype;
@@ -268,6 +272,6 @@
 	// =========================================================================
 	// DEFINE NAMESPACE
 	// =========================================================================
-
+	window.materialadmin = window.materialadmin || {};
 	window.materialadmin.AppOffcanvas = new AppOffcanvas;
 }(this.materialadmin, jQuery)); // pass in (namespace, jQuery):

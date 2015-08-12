@@ -20,12 +20,16 @@
 //= require libs/spin.js/spin
 //= require libs/autosize/jquery.autosize
 //= require libs/nanoscroller/jquery.nanoscroller
-//= require core/source/App
+//= require libs/pdf/pdf.worker
+//= require libs/pdf/pdf
+//= require libs/angular/angular.min
 //= require core/source/AppNavigation
 //= require core/source/AppOffcanvas
 //= require core/source/AppCard
 //= require core/source/AppForm
 //= require core/source/AppNavSearch
 //= require core/source/AppVendor
+//= require core/source/App
 //= require core/demo/Demo
 //= require core/demo/DemoUIMessages
+//= require core/source/AngularApp
