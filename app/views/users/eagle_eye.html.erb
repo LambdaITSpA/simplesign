@@ -37,7 +37,7 @@
 					serial: $scope.serial
 				}
 				console.log(get_data);
-				url = 'http://localhost/users/check_chilean_id_with_rut';
+				url = 'http://<%= request.host %>/users/check_chilean_id_with_rut';
 				params = '?rut=' + get_data.rut + '&serial=' +get_data.serial;
 				console.log(url+params);
 				$http.get(url + params).
